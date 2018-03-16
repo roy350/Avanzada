@@ -84,7 +84,12 @@ void arraylist_concatenate(ArrayList* list1, ArrayList* list2)
   int aux = 0;
   while ((list1->count + list2->count) > list1->size){
     list1 -> size *= 2;
-    //list1 -> array = malloc(sizeof(int)* list1->size);
+    int* aux = malloc(sizeof(int)* list1->size);
+    for (int i = 0; i < list1->count; i++) {
+      aux[i] = list1->array[i];
+    }
+    free(list1->array);
+    list1->array = aux;
   }
   int aux2 = list1->count;
   while(list1->count < (aux2 + list2->count)){
